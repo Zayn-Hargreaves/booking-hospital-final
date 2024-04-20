@@ -1,6 +1,7 @@
 import User from "../models/UserSchema.js"
 import Doctor from "../models/DoctorSchema.js"
 import Booking from "../models/BookingSchema.js"
+
 import Stripe from 'stripe'
 
 export const getCheckoutSession = async(req, res) =>{
@@ -11,7 +12,7 @@ export const getCheckoutSession = async(req, res) =>{
         const session = await stripe.checkout.sessions.create({
             payment_method_types:['card'],
             mode:'payment',
-            success_url:`http://localhost:5173/checkout-success`,
+            success_url:`${process.env.CLIENT_SITE_URL}/checkout-success`,
             cancel_url:`${req.protocol}://${req.get('host')}/doctors/${doctor._id}`,
             customer_email:user.email,
             client_reference_id:req.params.doctorId,
