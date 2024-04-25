@@ -11,7 +11,7 @@ const DoctorDetails = () => {
     const [tab, setTab] = useState('about')
 
     const {id}= useParams()
-    const { data:doctor, loading, error } = useFetchData(`http://localhost:3000/api/v1/doctors/${id}`)
+    const { data:doctor, loading, error } = useFetchData(`https://booking-hospital-final.onrender.com/api/v1/doctors/${id}`)
     const {name, qualifications, experiences, timeSlots, reviews, bio, about, averageRating, totalRating, specialization, ticketPrice, photo} = doctor
     return (
         <section>

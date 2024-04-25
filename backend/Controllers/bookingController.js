@@ -12,7 +12,7 @@ export const getCheckoutSession = async(req, res) =>{
         const session = await stripe.checkout.sessions.create({
             payment_method_types:['card'],
             mode:'payment',
-            success_url:`http://localhost:5173/checkout-success`,
+            success_url:`https://lucky-shortbread-5a3b74.netlify.app/checkout-success`,
             cancel_url:`${req.protocol}://${req.get('host')}/doctors/${doctor._id}`,
             customer_email:user.email,
             client_reference_id:req.params.doctorId,
@@ -38,7 +38,6 @@ export const getCheckoutSession = async(req, res) =>{
             appointmentDate:new Date().toLocaleDateString(),
             session:session.id
         })
-        console.log(booking)
         await booking.save()
         res.status(200).json({success:true, message:"Thanh toán thành công", session})
     } catch (error) {
